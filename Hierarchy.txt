@@ -1,0 +1,53 @@
+App - general page wrapper
+    no props or state
+    App -> {Routelist, HomePage, Nav} -> [Jobs, Companies]
+
+Nav
+    no props or state
+
+
+
+
+Routelist - route list
+    no props or state
+
+
+
+
+HomePage
+    no props or state
+
+JobList  - shows a list of all jobs 
+    state=jobs 
+    Routelist -> Jobs -> Job, SearchForm
+
+        Job - shows info for one job
+            prop={job}
+            like { id, title, salary, equity, companyHandle, companyName}
+            no state
+            Jobs -> Job
+
+
+CompanyList - shows a list of all Companies
+    state=Companies
+    Routelist -> Companies -> Company, SearchForm 
+
+        Company - shows company info and all jobs for company
+            prop={company}
+            like { handle, name, description, numEmployees, logoUrl }
+            Companies -> { CompanyJobFilter } Company -> -> Job
+
+CompanyDetail 
+    
+
+
+
+SearchForm
+    prop=updateFilter
+    state=formData
+
+CompanyJobFilter
+    prop={jobID, compHandle}
+
+
+    
