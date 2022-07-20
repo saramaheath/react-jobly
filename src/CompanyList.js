@@ -16,21 +16,11 @@ function CompanyList() {
   const [params, setParams] = useState({});
   console.log("companyList at start", companyList);
 
-  // useEffect(function fetchCompaniesWhenMounted() {
-  //   async function fetchCompanies() {
-  //     const response = await JoblyApi.getCompanies();
-  //     setCompanyList({ data: response, isLoading: false });
-  //   }
-  //   fetchCompanies();
-  // }, []);
-
   function filter(formData) {
     console.log("filter", formData);
-    //let newfield = "params"
     const params = { name: formData.params };
     console.log("params=", params);
     setParams(params);
-    // setCompanyList( curr => ({...curr, [newfield]: params}))
     console.log("filter compList", companyList);
   }
 
