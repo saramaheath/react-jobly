@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import "./Navigation.css"
 
 /**Navbar for whole site
  * 
@@ -8,9 +9,9 @@ function Navigation(){
     console.log('Navigation');
     return (
         <nav className='navbar'>
-            <Link to="/">Home</Link>
-            <Link to="/companies">Companies</Link>
-            <Link to="/jobs">Jobs</Link>
+            <NavLink className="NavJobly" to="/">Jobly</NavLink>
+            <NavLink className="NavLink" to="/companies">Companies</NavLink>
+            <NavLink className="NavLink" to="/jobs">Jobs</NavLink>
         </nav>
     )
 }

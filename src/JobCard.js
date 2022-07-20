@@ -1,4 +1,4 @@
-
+import './JobCard.css'
 /**Shows information for a single job
  * 
  * Props:
