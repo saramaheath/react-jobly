@@ -9,8 +9,8 @@ function CompanyCard({company}) {
     console.log("CompanyCard", company)
     return (
         <div className="CompanyCard">
-            <p>Company Name</p>
-            <p>Company description</p>
+            <p>{company.name}</p>
+            <p>{company.description}</p>
         </div>
     )
 }
