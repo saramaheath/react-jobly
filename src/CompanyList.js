@@ -21,13 +21,27 @@ function CompanyList() {
     fetchCompanies();
   }, []);
 
+  function filter(formData) {
+    const params = { params: { name: formData } };
+    useEffect(
+      function fetchCompaniesOnChange() {
+        async function fetchFilteredCompanies() {
+          const response = await JoblyApi.getFilteredCompanies(params);
+          setCompanyList({ data: response, isLoading: false });
+        }
+        fetchFilteredCompanies();
+      },
+      [formData]
+    );
+  }
+
   console.log(companyList, "COMPANY LIST!!!!!!!!!!!!!!!!!!!!!!!");
   if (companyList.isLoading) return <i>Loading...</i>;
 
   return (
     <div>
       <p>Company List</p>
-      <SearchForm />
+      <SearchForm filter={filter} />
       {companyList.data.map((company) => (
         <CompanyCard key={company.handle} company={company} />
       ))}
