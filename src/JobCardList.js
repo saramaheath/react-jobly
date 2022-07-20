@@ -1,5 +1,6 @@
 import JobCard from "./JobCard";
 
+
 /**
  * Show a detailed list of jobs
  *
@@ -13,7 +14,9 @@ function JobCardList({ jobs }) {
   console.log("JobCardList", jobs);
   return (
     <div>
-      <JobCard />
+      {jobs.map((job) => (
+        <JobCard key={job.id} job={job} />
+      ))}
     </div>
   );
 }

@@ -8,10 +8,10 @@ function JobCard({job}) {
     console.log("JobCard", job)
     return (
         <div className="JobCard">
-            <p>Job Title</p>
-            <p>Company Name</p>
-            <p>Salaray</p>
-            <p>equity</p>
+            <p>{job.title}</p>
+            <p>{job.companyName}</p>
+            <p>{job.salary}</p>
+            <p>{job.equity}</p>
         </div>
     )
 }
