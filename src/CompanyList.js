@@ -11,10 +11,10 @@ function CompanyList() {
   console.log("companylist");
   const [companyList, setCompanyList] = useState({
     data: null,
-    params: {},
     isLoading: true,
   });
-  console.log("companyList at start", companyList)
+  const [params, setParams] = useState({});
+  console.log("companyList at start", companyList);
 
   // useEffect(function fetchCompaniesWhenMounted() {
   //   async function fetchCompanies() {
@@ -25,23 +25,24 @@ function CompanyList() {
   // }, []);
 
   function filter(formData) {
-    console.log("filter", formData)
-    let newfield = "params"
-    const params = { name: formData };
-    console.log("params=", params)
-    setCompanyList( curr => ({...curr, [newfield]: params}))
-    console.log("filter compList", companyList)
+    console.log("filter", formData);
+    //let newfield = "params"
+    const params = { name: formData.params };
+    console.log("params=", params);
+    setParams(params);
+    // setCompanyList( curr => ({...curr, [newfield]: params}))
+    console.log("filter compList", companyList);
   }
 
   useEffect(
     function fetchCompaniesOnChange() {
       async function fetchFilteredCompanies() {
-        const response = await JoblyApi.getFilteredCompanies(companyList.params);
-        setCompanyList({ data: response, params: {} ,isLoading: false });
+        const response = await JoblyApi.getFilteredCompanies(params);
+        setCompanyList({ data: response, isLoading: false });
       }
       fetchFilteredCompanies();
     },
-    []
+    [params]
   );
 
   console.log(companyList, "COMPANY LIST!!!!!!!!!!!!!!!!!!!!!!!");
