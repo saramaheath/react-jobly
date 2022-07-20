@@ -11,29 +11,38 @@ function CompanyList() {
   console.log("companylist");
   const [companyList, setCompanyList] = useState({
     data: null,
+    params: {},
     isLoading: true,
   });
-  useEffect(function fetchCompaniesWhenMounted() {
-    async function fetchCompanies() {
-      const response = await JoblyApi.getCompanies();
-      setCompanyList({ data: response, isLoading: false });
-    }
-    fetchCompanies();
-  }, []);
+  console.log("companyList at start", companyList)
+
+  // useEffect(function fetchCompaniesWhenMounted() {
+  //   async function fetchCompanies() {
+  //     const response = await JoblyApi.getCompanies();
+  //     setCompanyList({ data: response, isLoading: false });
+  //   }
+  //   fetchCompanies();
+  // }, []);
 
   function filter(formData) {
-    const params = { params: { name: formData } };
-    useEffect(
-      function fetchCompaniesOnChange() {
-        async function fetchFilteredCompanies() {
-          const response = await JoblyApi.getFilteredCompanies(params);
-          setCompanyList({ data: response, isLoading: false });
-        }
-        fetchFilteredCompanies();
-      },
-      [formData]
-    );
+    console.log("filter", formData)
+    let newfield = "params"
+    const params = { name: formData };
+    console.log("params=", params)
+    setCompanyList( curr => ({...curr, [newfield]: params}))
+    console.log("filter compList", companyList)
   }
+
+  useEffect(
+    function fetchCompaniesOnChange() {
+      async function fetchFilteredCompanies() {
+        const response = await JoblyApi.getFilteredCompanies(companyList.params);
+        setCompanyList({ data: response, params: {} ,isLoading: false });
+      }
+      fetchFilteredCompanies();
+    },
+    []
+  );
 
   console.log(companyList, "COMPANY LIST!!!!!!!!!!!!!!!!!!!!!!!");
   if (companyList.isLoading) return <i>Loading...</i>;

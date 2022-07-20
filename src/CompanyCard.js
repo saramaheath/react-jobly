@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
  * -company: {handle, name, description, numEmployees, logoURL}
  */
 function CompanyCard({ company }) {
-  console.log("CompanyCard", company);
+  
   return (
     <Link to={`/companies/${company.handle}`}>
       <div className="CompanyCard">

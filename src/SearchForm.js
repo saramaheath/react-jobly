@@ -9,7 +9,7 @@ import React, { useState } from "react"
  */
 function SearchForm({filter}) {
     const [formData, setFormData] = useState({});
-    console.log("SearchForm", filterFunction)
+    console.log("SearchForm")
 
     /** Update form input. */
   function handleChange(evt) {
@@ -24,12 +24,11 @@ function SearchForm({filter}) {
   function handleSubmit(evt) {
     evt.preventDefault();
     filter(formData);
-    setFormData(initialFormData);
   }
 
     return(
         <form className="SearchForm" onSubmit={handleSubmit}>
-            <input onChange={handleChange} name="search" placeholder="Enter search term.."></input>
+            <input onChange={handleChange} name="params" placeholder="Enter search term.."></input>
             <button>Submit</button>
         </form>
     )
