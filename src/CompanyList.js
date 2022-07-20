@@ -14,14 +14,11 @@ function CompanyList() {
     isLoading: true,
   });
   const [params, setParams] = useState({});
-  console.log("companyList at start", companyList);
 
   function filter(formData) {
-    console.log("filter", formData);
     const params = { name: formData.params };
-    console.log("params=", params);
+
     setParams(params);
-    console.log("filter compList", companyList);
   }
 
   useEffect(
@@ -35,12 +32,10 @@ function CompanyList() {
     [params]
   );
 
-  console.log(companyList, "COMPANY LIST!!!!!!!!!!!!!!!!!!!!!!!");
   if (companyList.isLoading) return <i>Loading...</i>;
 
   return (
     <div>
-      <p>Company List</p>
       <SearchForm filter={filter} />
       {companyList.data.map((company) => (
         <CompanyCard key={company.handle} company={company} />

@@ -8,20 +8,16 @@ import React, { useEffect, useState } from "react";
  * Routes --> JobList --> {SearchForm, JobCardList}
  */
 function JobList() {
-  console.log("joblist");
+  console.log("JobList");
   const [jobList, setJobList] = useState({
     data: null,
     isLoading: true,
   });
   const [params, setParams] = useState({});
-  console.log("joblist at start", jobList);
 
   function filter(formData) {
-    console.log("filter", formData);
     const params = { title: formData.params };
-    console.log("params=", params);
     setParams(params);
-    console.log("filter jobList", jobList);
   }
 
   useEffect(
@@ -35,14 +31,12 @@ function JobList() {
     [params]
   );
 
-  console.log(jobList, "JOB LIST!!!!!!!!!!!!!!!!!!!!!!!");
   if (jobList.isLoading) return <i>Loading...</i>;
 
   return (
     <div>
-      <p>Job List</p>
       <SearchForm filter={filter} />
-      <JobCardList jobs={jobList.data}/>
+      <JobCardList jobs={jobList.data} />
     </div>
   );
 }

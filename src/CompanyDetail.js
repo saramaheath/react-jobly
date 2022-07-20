@@ -8,13 +8,13 @@ import { JoblyApi } from "./api";
  * Routes --> CompanyDetail --> JobCardList
  */
 function CompanyDetail() {
-  console.log("company detail");
+  console.log('CompanyDetail');
   const [companyDetail, setCompanyDetail] = useState({
     data: null,
     isLoading: true,
   });
   const params = useParams();
-  console.log(params, "PARAMS*****************************");
+
   useEffect(function fetchCompanyDetailWhenMounted() {
     async function fetchCompanyDetail() {
       const response = await JoblyApi.getCompany(params.handle);
@@ -23,12 +23,12 @@ function CompanyDetail() {
     fetchCompanyDetail();
   }, []);
 
-  console.log(companyDetail, "COMPANY DETAIL!!!!!!!!!!!!!!!!!!!!!!!");
   if (companyDetail.isLoading) return <i>Loading...</i>;
 
   return (
     <div>
-      <p>Company Detail</p>
+      <h2>{companyDetail.data.name}</h2>
+      <h3>{companyDetail.data.description}</h3>
       <JobCardList jobs={companyDetail.data.jobs}/>
     </div>
   );

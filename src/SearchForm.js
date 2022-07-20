@@ -3,7 +3,7 @@ import React, { useState } from "react"
  * Form for filtering jobs or companies
  * 
  * Props:
- * -filterFunction* : fn to call parent function
+ * -filter : fn to call parent function
  *
  * {CompanyList, JobList} -> SearchForm
  */
