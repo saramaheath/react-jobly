@@ -3,6 +3,13 @@ import Navigation from "./Navigation";
 import RouteList from "./RouteList";
 import { BrowserRouter } from "react-router-dom";
 
+
+/**
+ * App -- wrapper component
+ * 
+ * App -> {Navigation, RouteList}
+ * 
+ */
 function App() {
   return (
     <div className="App">
