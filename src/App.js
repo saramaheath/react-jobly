@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 /**
  * App -- wrapper component
  * 
- * App -> {Navigation, RouteList}
+ * App -> UserContext -> {Navigation, RouteList}
  * 
  */
 function App() {

@@ -1,53 +1,81 @@
-App - general page wrapper
-    no props or state
-    App -> {Routelist, HomePage, Nav} -> [Jobs, Companies]
+**App - general page wrapper
+    props=none
+    state=none (user)
+    App -> {userContext} -> {Routelist, Nav} -> [ HomePage, JobList, CompanyList, CompanyDetail]
 
-Nav
-    no props or state
-
-
-
+**Navigation
+    context={username, firstname, lastname, email}
+    props=none
+    state=none
+        App -> Navigation
 
 Routelist - route list
-    no props or state
+    props=none 
+    state=none
 
-
-
-
-HomePage
-    no props or state
+**HomePage
+    context={username, firstname, lastname, email} 
+    props=none
+    state=none
+    RouteList -> HomePage -> { LoginForm, SignUpForm } (not actual render, but link to route)
 
 JobList  - shows a list of all jobs 
-    state=jobs 
-    Routelist -> Jobs -> Job, SearchForm
+    props=none
+    state=jobsList, params 
+    Routelist -> JobLIst -> {JobCardList, SearchForm} 
 
-        Job - shows info for one job
+    JobCardList - shows a list of all JobCardList
+        props=jobs
+        state=none
+        JobList -> JobCard
+
+        **JobCard - shows info for one job
+            context={username, firstname, lastname, email}
             prop={job}
             like { id, title, salary, equity, companyHandle, companyName}
-            no state
-            Jobs -> Job
+            state=none
+            JobCardList -> JobCard
 
 
 CompanyList - shows a list of all Companies
-    state=Companies
-    Routelist -> Companies -> Company, SearchForm 
+    props=none
+    state=companyList, params
+    Routelist -> CompanyList -> {CompanyCard, SearchForm} 
 
-        Company - shows company info and all jobs for company
+        CompanyCard - shows company info and all jobs for company
             prop={company}
             like { handle, name, description, numEmployees, logoUrl }
-            Companies -> { CompanyJobFilter } Company -> -> Job
+            state=none
+            CompanyList -> CompanyCard
 
-CompanyDetail 
+CompanyDetail - shows details and jobs of a single company
+    props=none
+    state=companyDetail, params
+    RouteList -> CompanyDetail -> JobCardList
     
-
-
-
 SearchForm
-    prop=updateFilter
+    prop=filter (function)
     state=formData
+    {CompanyList, JobList} -> SearchForm
 
-CompanyJobFilter
-    prop={jobID, compHandle}
+**LoginForm
+    prop=none
+    state=formData
+    HomePage -> LoginForm
+
+logout route for logging out (navbar link to that path)
+
+**SignUpForm
+    prop=none
+    state=formData
+    HomePage -> LoginForm
+
+**ProfileForm 
+    context={username, firstname, lastname, email}
+    prop=none
+    state=formdata
+    RoutesList -> ProfileForm
+
 
 
     
