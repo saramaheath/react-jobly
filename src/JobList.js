@@ -4,6 +4,13 @@ import SearchForm from "./SearchForm";
 import React, { useEffect, useState } from "react";
 
 /**Shows list of all jobs and search form
+ * 
+ * Props:
+ * -None
+ * 
+ * State:
+ * -jobList
+ * -params
  *
  * Routes --> JobList --> {SearchForm, JobCardList}
  */
@@ -14,11 +21,6 @@ function JobList() {
     isLoading: true,
   });
   const [params, setParams] = useState({});
-
-  function filter(formData) {
-    const params = { title: formData.params };
-    setParams(params);
-  }
 
   useEffect(
     function fetchJobsOnChange() {
@@ -31,10 +33,15 @@ function JobList() {
     [params]
   );
 
+  function filter(formData) {
+    const params = { title: formData.params };
+    setParams(params);
+  }
+
   if (jobList.isLoading) return <i>Loading...</i>;
 
   return (
-    <div>
+    <div className="JobList">
       <SearchForm filter={filter} />
       <JobCardList jobs={jobList.data} />
     </div>

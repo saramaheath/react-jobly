@@ -4,6 +4,13 @@ import { JoblyApi } from "./api";
 import React, { useEffect, useState } from "react";
 
 /**Shows list of all companies and search form
+ * 
+ * Props:
+ * -None
+ * 
+ * State:
+ * -companyList
+ * -params
  *
  * Routes --> CompanyList --> { SearchForm, CompanyCard }
  */
@@ -14,12 +21,6 @@ function CompanyList() {
     isLoading: true,
   });
   const [params, setParams] = useState({});
-
-  function filter(formData) {
-    const params = { name: formData.params };
-
-    setParams(params);
-  }
 
   useEffect(
     function fetchCompaniesOnChange() {
@@ -32,10 +33,16 @@ function CompanyList() {
     [params]
   );
 
+  function filter(formData) {
+    const params = { name: formData.params };
+
+    setParams(params);
+  }
+  
   if (companyList.isLoading) return <i>Loading...</i>;
 
   return (
-    <div>
+    <div className="CompanyList">
       <SearchForm filter={filter} />
       {companyList.data.map((company) => (
         <CompanyCard key={company.handle} company={company} />

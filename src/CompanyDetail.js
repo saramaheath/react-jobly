@@ -5,6 +5,13 @@ import { JoblyApi } from "./api";
 
 /**Shows details and jobs of one single company
  *
+ * Props:
+ * -None
+ * 
+ * State:
+ * -companyDetail
+ * -params
+ * 
  * Routes --> CompanyDetail --> JobCardList
  */
 function CompanyDetail() {
@@ -26,7 +33,7 @@ function CompanyDetail() {
   if (companyDetail.isLoading) return <i>Loading...</i>;
 
   return (
-    <div>
+    <div className="CompanyDetail">
       <h2>{companyDetail.data.name}</h2>
       <h3>{companyDetail.data.description}</h3>
       <JobCardList jobs={companyDetail.data.jobs}/>

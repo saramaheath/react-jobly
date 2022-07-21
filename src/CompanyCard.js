@@ -5,12 +5,16 @@ import './CompanyCard.css'
  *
  * Props:
  * -company: {handle, name, description, numEmployees, logoURL}
+ * 
+ * State:
+ * -None
  */
 function CompanyCard({ company }) {
   
   return (
     <Link to={`/companies/${company.handle}`}>
       <div className="CompanyCard">
+        <img src={company.logoUrl}></img>
         <p>{company.name}</p>
         <p>{company.description}</p>
       </div>
