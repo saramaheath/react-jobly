@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 /**form to sign up a new user
  *
@@ -8,16 +8,17 @@ import { useNavigate } from "react-router-dom"
  *
  * State:
  * -formData
- * 
+ *
  * RouteList -> SignupForm
  */
 
 function SignupForm({ signup }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   console.log("SignupForm");
   const [formData, setFormData] = useState({});
-  console.log(formData, 'formData for sign up');
-  
+  const [errorState, setErrorState] = useState([]);
+  console.log(formData, "formData for sign up");
+
   /** Update form input. */
   function handleChange(evt) {
     const input = evt.target;
@@ -27,15 +28,25 @@ function SignupForm({ signup }) {
     }));
   }
 
+  //TODO:try/catch to display error messages
   /** Call parent function. */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    signup(formData);
-    navigate("/companies")
+    try {
+      await signup(formData);
+      navigate("/companies");
+    } catch(err) {
+      setErrorState(err)
+    }
   }
-
+  //TODO:bootstrap format for error message 
   return (
-    <form className="SignupForm" onSubmit={handleSubmit}>
+    <div className="SignupForm">
+    {errorState.length > 0 && 
+    <div>
+      {errorState.map(error => <p>{error}</p> )}
+    </div> }
+    <form onSubmit={handleSubmit}>
       <span>
         <input
           onChange={handleChange}
@@ -61,6 +72,7 @@ function SignupForm({ signup }) {
         <button>sign up</button>
       </span>
     </form>
+    </div>
   );
 }
 
