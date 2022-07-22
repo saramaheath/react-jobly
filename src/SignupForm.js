@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"
+
 /**form to sign up a new user
  *
  * Props:
@@ -11,6 +13,7 @@ import React, { useState } from "react";
  */
 
 function SignupForm({ signup }) {
+  const navigate = useNavigate()
   console.log("SignupForm");
   const [formData, setFormData] = useState({});
   console.log(formData, 'formData for sign up');
@@ -28,6 +31,7 @@ function SignupForm({ signup }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     signup(formData);
+    navigate("/companies")
   }
 
   return (

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"
+
 /**form to login in existing user
  *
  * Props:
@@ -10,6 +12,7 @@ import React, { useState } from "react";
  * RouteList -> LoginForm
  */
 function LoginForm({ login }) {
+  const navigate = useNavigate()
   console.log("loginform");
   const [formData, setFormData] = useState({});
   console.log(formData, "formData for login");
@@ -27,6 +30,7 @@ function LoginForm({ login }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     login(formData);
+    navigate("/companies")
   }
 
   return (

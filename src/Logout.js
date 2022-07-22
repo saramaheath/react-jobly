@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 
 /**used to log users out
  * 
@@ -9,8 +10,11 @@
  * 
  */
 function Logout ({logout}) {
+    const navigate = useNavigate()
     console.log("logout")
-    logout()
+    logout();
+    navigate("/")
+    
 }
 
 export default Logout
