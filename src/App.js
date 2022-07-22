@@ -15,82 +15,79 @@ import UserContext from "./userContext";
 function App() {
   console.log("App");
   const [user, setUser] = useState({});
+  const [username, setUsername] = useState({});
   console.log(user, "USER!!!!!!!");
-  const [loginCredentials, setCredentialsForLogin] = useState({});
-  const [signupCredentials, setCredentialsForsignup] = useState({});
 
-  //makes call to api to get token for user loggin in
-  useEffect(
-    function fetchTokenOnLogIn() {
-      async function fetchToken() {
-        const token = await JoblyApi.login(loginCredentials);
-        setUser(loginCredentials);
-        console.log(loginCredentials.username, "credentials username");
+  /**makes call to backend API to sign up a new user 
+   * takes formData (obj) {
+        username: username,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
       }
-      fetchToken();
-    },
-    [loginCredentials]
-  );
+    generates token that updates in JoblyApi class
+    sets username state
+  */
+  function signup(formData) {
+    async function fetchTokenOnSignUp() {
+      const signupInfo = {
+        username: formData.username,
+        password: formData.password,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+      };
+      const token = await JoblyApi.signup(signupInfo);
+      console.log("token after signup", token);
+      setUsername(signupInfo.username);
+      console.log(signupInfo.username, "signup username");
+    }
+    fetchTokenOnSignUp();
+  }
 
-  //makes call to api to get user data after registration
-  
-  useEffect(
-    function fetchTokenOnSignUp() {
-      async function fetchToken() {
-        const token = await JoblyApi.signup(signupCredentials);
-        console.log("token after signup", token)
-        setUser(signupCredentials);
-        console.log(signupCredentials.username, "credentials username");
-        console.log(signupCredentials, "credentials")
+  /**makes call to backend API to log in an exisiting user 
+   * takes formData (obj) {
+        username: username,
+        password: password,
       }
-      fetchToken();
-    },
-    [signupCredentials]
-  );
+    generates token that updates in JoblyApi class
+    sets username state
+  */
+  function login(formData) {
+    async function fetchTokenOnLogin() {
+      const loginInfo = {
+        username: formData.username,
+        password: formData.password,
+      };
+      const token = await JoblyApi.login(loginInfo);
+      setUsername(loginInfo.username);
+      console.log(loginInfo, "login info");
+    }
+    fetchTokenOnLogin();
+  }
 
+  console.log(username, "username");
 
-  //makes call to api to get user data after login
+  //makes call to api to get user data, when username state updates
   useEffect(
     function fetchUserOnChange() {
       async function fetchUser() {
-        const userData = await JoblyApi.getUser(user.username);
+        const userData = await JoblyApi.getUser(username);
         console.log("FETCH USER RESPONSE!!!!", userData);
         setUser(userData);
       }
       fetchUser();
     },
-    [user]
+    [username]
   );
-
-  
-
-
-
-  function updateCredentialsOnLogin(formData) {
-    console.log("update on login credentials *********************");
-    setCredentialsForLogin({
-      username: formData.username,
-      password: formData.password,
-    });
-  }
-
-  function updateCredentialsOnSignUp(formData) {
-    console.log("update on signup credentials *********************");
-    setCredentialsForsignup({
-      username: formData.username,
-      password: formData.password,
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email
-    });
-  }
 
   return (
     <div className="App">
       <UserContext.Provider value={{ user: user }}>
         <BrowserRouter>
           <Navigation />
-          <RouteList login={updateCredentialsOnLogin} signup={updateCredentialsOnSignUp} />
+          <RouteList login={login} signup={signup} />
         </BrowserRouter>
       </UserContext.Provider>
     </div>
@@ -98,4 +95,3 @@ function App() {
 }
 
 export default App;
-//export {updateCredentials};
