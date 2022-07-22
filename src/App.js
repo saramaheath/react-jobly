@@ -36,17 +36,19 @@ function App() {
   /**makes call to api to get user data, when token state updates, sets state
    * for user
    */
+  
+  //TODO: try/catch with token. if error clear out token from local storage
   useEffect(
     function fetchUserOnChange() {
       console.log("fetchUserOnChange")
     
-      async function fetchUser(tokenInfo) {
-        const userData = await JoblyApi.getUser(tokenInfo.username);
+      async function fetchUser(username) {
+        const userData = await JoblyApi.getUser(username);
         setUser(userData);
       }
       if (token !== null) {
-        const tokenInfo = jwt_decode(token);
-        fetchUser(tokenInfo);
+        const { username } = jwt_decode(token);
+        fetchUser(username);
       }
     },
     [token]

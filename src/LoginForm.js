@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom"
 function LoginForm({ login }) {
   const navigate = useNavigate()
   console.log("loginform");
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({username: '', password: ''});
   console.log(formData, "formData for login");
 
   /** Update form input. */
@@ -25,11 +25,11 @@ function LoginForm({ login }) {
       [input.name]: input.value,
     }));
   }
-
+ //TODO: add try/catch for error handling and messages
   /** Call parent function. */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    login(formData);
+    await login(formData);
     navigate("/companies")
   }
 
@@ -40,11 +40,13 @@ function LoginForm({ login }) {
           onChange={handleChange}
           name="username"
           placeholder="username"
+          value={formData.username}
         ></input>
         <input
           onChange={handleChange}
           name="password"
           placeholder="password"
+          value={formData.password}
         ></input>
         <button>log in</button>
       </span>
