@@ -6,27 +6,41 @@ import { JoblyApi } from "./api";
 import { BrowserRouter } from "react-router-dom";
 import userContext from "./userContext";
 
-
 /**
  * App -- wrapper component
  *
+ * props= none
+ * state= 
+ * -user: null or {
+        username: username,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        isAdmin: boolean,
+        application: [...]
+
+      }
+ * -username: null or 'username'
+ * -token: null or 'token'
+ * 
  * App -> UserContext -> {Navigation, RouteList}
  *
  */
 function App() {
   console.log("App");
   const [user, setUser] = useState(null);
-  const [username, setUsername] = useState({});
-  console.log(user, "USER!!!!!!!");
+  const [username, setUsername] = useState(null);
+  const [token, setToken] = useState(null);
+  console.log("user=", user, "username=", username, "token=", token);
 
-
-
-//makes call to api to get user data, when username state updates
+  /**makes call to api to get user data, when username state updates, sets state
+   * for user
+   */
   useEffect(
     function fetchUserOnChange() {
       async function fetchUser() {
         const userData = await JoblyApi.getUser(username);
-        console.log("FETCH USER RESPONSE!!!!", userData);
         setUser(userData);
       }
       fetchUser();
@@ -35,7 +49,8 @@ function App() {
   );
 
   /**makes call to backend API to sign up a new user 
-   * takes formData (obj) {
+   * 
+   * takes signupInfo (obj) {
         username: username,
         password: password,
         firstName: firstName,
@@ -44,55 +59,42 @@ function App() {
       }
     generates token that updates in JoblyApi class
     sets username state
+    sets token state
   */
-  function signup(formData) {
+  function signup(signupInfo) {
     async function fetchTokenOnSignUp() {
-      const signupInfo = {
-        username: formData.username,
-        password: formData.password,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-      };
       const token = await JoblyApi.signup(signupInfo);
-      console.log("token after signup", token);
       setUsername(signupInfo.username);
-      console.log(signupInfo.username, "signup username");
+      setToken(token);
     }
     fetchTokenOnSignUp();
   }
 
   /**makes call to backend API to log in an exisiting user 
-   * takes formData (obj) {
+   * takes loginInfo (obj) {
         username: username,
         password: password,
       }
     generates token that updates in JoblyApi class
     sets username state
+    sets token state
   */
-  function login(formData) {
+  function login(loginInfo) {
     async function fetchTokenOnLogin() {
-      const loginInfo = {
-        username: formData.username,
-        password: formData.password,
-      };
-      await JoblyApi.login(loginInfo);
+      const token = await JoblyApi.login(loginInfo);
       setUsername(loginInfo.username);
-      console.log(loginInfo, "login info");
+      setToken(token);
     }
     fetchTokenOnLogin();
   }
 
+  /** logs current user out, clears token and clears user */
   function logout() {
-      setUser(null);
-      JoblyApi.token = null;
-      console.log(user, "user after logout");
-    }
-    
-
-  console.log(username, "username");
-
-  
+    setUser(null);
+    //not sure where clearing token should live?
+    JoblyApi.token = null;
+    setToken(null);
+  }
 
   return (
     <div className="App">

@@ -11,7 +11,11 @@ import { Navigate, Route, Routes } from "react-router-dom";
 
 /**Routes for browser
  *
- * App --> RouterList --> { Homepage, CompanyList, CompanyDetail, JobList}
+ * props=functions to be called in parent: login, signup, logout
+ * state=none 
+ * 
+ * App --> RouterList --> { Homepage, CompanyList, CompanyDetail, JobList, LoginForm,
+ * SignupForm, ProfileForm, Logout}
  */
 function RouteList({ login, signup, logout }) {
   console.log("RouteList")

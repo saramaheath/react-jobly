@@ -1,17 +1,20 @@
 import React, { useState } from "react";
-/**form to signing up a new user
+/**form to sign up a new user
  *
  * Props:
  * -signup: fn called in parent
  *
  * State:
  * -formData
+ * 
+ * RouteList -> SignupForm
  */
 
 function SignupForm({ signup }) {
   console.log("SignupForm");
   const [formData, setFormData] = useState({});
-
+  console.log(formData, 'formData for sign up');
+  
   /** Update form input. */
   function handleChange(evt) {
     const input = evt.target;

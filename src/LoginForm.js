@@ -6,10 +6,13 @@ import React, { useState } from "react";
  *
  * State:
  * -formData
+ *
+ * RouteList -> LoginForm
  */
 function LoginForm({ login }) {
   console.log("loginform");
   const [formData, setFormData] = useState({});
+  console.log(formData, "formData for login");
 
   /** Update form input. */
   function handleChange(evt) {
@@ -24,7 +27,6 @@ function LoginForm({ login }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     login(formData);
-    console.log(formData, "formData");
   }
 
   return (
