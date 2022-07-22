@@ -8,13 +8,13 @@ import SignupForm from "./SignupForm"
 import ProfileForm from "./ProfileForm";
 import Logout from "./Logout";
 import { Navigate, Route, Routes } from "react-router-dom";
-import {updateCredentials} from "./App";
 
 /**Routes for browser
  *
  * App --> RouterList --> { Homepage, CompanyList, CompanyDetail, JobList}
  */
-function RouteList({ login, signup }) {
+function RouteList({ login, signup, logout }) {
+  console.log("RouteList")
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
@@ -24,7 +24,7 @@ function RouteList({ login, signup }) {
       <Route path="/login" element={<LoginForm login={login}/>} />
       <Route path="/signup" element={<SignupForm signup={signup} />} />
       <Route path="/profile" element={<ProfileForm />} />
-      <Route path="/logout" element={<Logout/>} />
+      <Route path="/logout" element={<Logout logout={logout} />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

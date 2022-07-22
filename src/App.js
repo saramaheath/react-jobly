@@ -4,7 +4,8 @@ import Navigation from "./Navigation";
 import RouteList from "./RouteList";
 import { JoblyApi } from "./api";
 import { BrowserRouter } from "react-router-dom";
-import UserContext from "./userContext";
+import userContext from "./userContext";
+
 
 /**
  * App -- wrapper component
@@ -14,9 +15,24 @@ import UserContext from "./userContext";
  */
 function App() {
   console.log("App");
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [username, setUsername] = useState({});
   console.log(user, "USER!!!!!!!");
+
+
+
+//makes call to api to get user data, when username state updates
+  useEffect(
+    function fetchUserOnChange() {
+      async function fetchUser() {
+        const userData = await JoblyApi.getUser(username);
+        console.log("FETCH USER RESPONSE!!!!", userData);
+        setUser(userData);
+      }
+      fetchUser();
+    },
+    [username]
+  );
 
   /**makes call to backend API to sign up a new user 
    * takes formData (obj) {
@@ -60,36 +76,32 @@ function App() {
         username: formData.username,
         password: formData.password,
       };
-      const token = await JoblyApi.login(loginInfo);
+      await JoblyApi.login(loginInfo);
       setUsername(loginInfo.username);
       console.log(loginInfo, "login info");
     }
     fetchTokenOnLogin();
   }
 
+  function logout() {
+      setUser(null);
+      JoblyApi.token = null;
+      console.log(user, "user after logout");
+    }
+    
+
   console.log(username, "username");
 
-  //makes call to api to get user data, when username state updates
-  useEffect(
-    function fetchUserOnChange() {
-      async function fetchUser() {
-        const userData = await JoblyApi.getUser(username);
-        console.log("FETCH USER RESPONSE!!!!", userData);
-        setUser(userData);
-      }
-      fetchUser();
-    },
-    [username]
-  );
+  
 
   return (
     <div className="App">
-      <UserContext.Provider value={{ user: user }}>
+      <userContext.Provider value={{ user }}>
         <BrowserRouter>
           <Navigation />
-          <RouteList login={login} signup={signup} />
+          <RouteList login={login} signup={signup} logout={logout} />
         </BrowserRouter>
-      </UserContext.Provider>
+      </userContext.Provider>
     </div>
   );
 }

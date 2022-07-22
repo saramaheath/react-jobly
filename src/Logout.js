@@ -9,9 +9,8 @@
  * 
  */
 function Logout ({logout}) {
-
-    //runs logout function
-    
+    console.log("logout")
+    logout()
 }
 
 export default Logout
