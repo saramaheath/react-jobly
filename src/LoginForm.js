@@ -7,7 +7,7 @@ import React, { useState } from "react"
  * State:
  * -formData
  */
-function LoginForm ({updateCredentials}) {
+function LoginForm ({login}) {
   console.log('loginform');
     const [formData, setFormData] = useState({})
 
@@ -23,11 +23,11 @@ function LoginForm ({updateCredentials}) {
   /** Call parent function. */
   function handleSubmit(evt) {
     evt.preventDefault();
-    updateCredentials(formData);
+    login(formData);
   }
 
     return(
-        <form className="SearchForm" onSubmit={handleSubmit}>
+        <form className="LoginForm" onSubmit={handleSubmit}>
           <span>
             <input onChange={handleChange} name="username" placeholder="username"></input>
             <input onChange={handleChange} name="password" placeholder="password"></input>

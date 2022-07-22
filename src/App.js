@@ -16,42 +16,72 @@ function App() {
   console.log("App");
   const [user, setUser] = useState({});
   console.log(user, "USER!!!!!!!");
-  const [credentials, setCredentials] = useState({});
+  const [loginCredentials, setCredentialsForLogin] = useState({});
+  const [signupCredentials, setCredentialsForsignup] = useState({});
+
+  //makes call to api to get token for user loggin in
+  useEffect(
+    function fetchTokenOnLogIn() {
+      async function fetchToken() {
+        const token = await JoblyApi.login(loginCredentials);
+        setUser(loginCredentials);
+        console.log(loginCredentials.username, "credentials username");
+      }
+      fetchToken();
+    },
+    [loginCredentials]
+  );
+
+  //makes call to api to get user data after registration
+  
+  useEffect(
+    function fetchTokenOnSignUp() {
+      async function fetchToken() {
+        const token = await JoblyApi.signup(signupCredentials);
+        console.log("token after signup", token)
+        setUser(signupCredentials);
+        console.log(signupCredentials.username, "credentials username");
+        console.log(signupCredentials, "credentials")
+      }
+      fetchToken();
+    },
+    [signupCredentials]
+  );
+
 
   //makes call to api to get user data after login
   useEffect(
     function fetchUserOnChange() {
       async function fetchUser() {
-        //TODO: user not response 
-        const response = await JoblyApi.getUser(user);
-        console.log("FETCH USER RESPONSE!!!!", response);
-        setUser({ user: response });
+        const userData = await JoblyApi.getUser(user.username);
+        console.log("FETCH USER RESPONSE!!!!", userData);
+        setUser(userData);
       }
       fetchUser();
     },
     [user]
   );
 
-  //makes call to api to get token for user loggin in
-  useEffect(
-    function fetchTokenOnLogIn() {
-      async function fetchToken() {
-        const response = await JoblyApi.login(credentials);
-        JoblyApi.token = response;
-        console.log("TOKEN RESPONSE!!!!!", response);
-        setUser(credentials.username);
-        console.log(credentials.username, "credentials username");
-      }
-      fetchToken();
-    },
-    [credentials]
-  );
+  
 
-  function updateCredentials(formData) {
-    console.log("update credentials *********************");
-    setCredentials({
+
+
+  function updateCredentialsOnLogin(formData) {
+    console.log("update on login credentials *********************");
+    setCredentialsForLogin({
       username: formData.username,
       password: formData.password,
+    });
+  }
+
+  function updateCredentialsOnSignUp(formData) {
+    console.log("update on signup credentials *********************");
+    setCredentialsForsignup({
+      username: formData.username,
+      password: formData.password,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email
     });
   }
 
@@ -60,7 +90,7 @@ function App() {
       <UserContext.Provider value={{ user: user }}>
         <BrowserRouter>
           <Navigation />
-          <RouteList updateCredentials={updateCredentials} />
+          <RouteList login={updateCredentialsOnLogin} signup={updateCredentialsOnSignUp} />
         </BrowserRouter>
       </UserContext.Provider>
     </div>

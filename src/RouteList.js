@@ -14,15 +14,15 @@ import {updateCredentials} from "./App";
  *
  * App --> RouterList --> { Homepage, CompanyList, CompanyDetail, JobList}
  */
-function RouteList({updateCredentials}) {
+function RouteList({ login, signup }) {
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/jobs" element={<JobList />} />
       <Route path="/companies" element={<CompanyList />} />
       <Route path="/companies/:handle" element={<CompanyDetail />} />
-      <Route path="/login" element={<LoginForm updateCredentials={updateCredentials}/>} />
-      <Route path="/signup" element={<SignupForm />} />
+      <Route path="/login" element={<LoginForm login={login}/>} />
+      <Route path="/signup" element={<SignupForm signup={signup} />} />
       <Route path="/profile" element={<ProfileForm />} />
       <Route path="/logout" element={<Logout/>} />
       <Route path="*" element={<Navigate to="/" />} />

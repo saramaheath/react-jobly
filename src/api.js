@@ -40,8 +40,20 @@ class JoblyApi {
   // Individual API routes
 
   /** Sign up new user */
-  static async login({username, password}) {
-    let res = await this.request(`auth/token`, {username, password}, "post")
+  static async signup({ username, password, firstName, lastName, email }) {
+    let res = await this.request(
+      `auth/register`,
+      { username, password, firstName, lastName, email },
+      "post"
+    );
+    this.token = res.token;
+    return res.token;
+  }
+
+  /** log in existing user */
+  static async login({ username, password }) {
+    let res = await this.request(`auth/token`, { username, password }, "post");
+    this.token = res.token;
     return res.token;
   }
 
@@ -76,14 +88,10 @@ class JoblyApi {
   }
 
   /** Get filtered list of Jobs */
-  static async getFilteredJobs(params){
+  static async getFilteredJobs(params) {
     let res = await this.request(`jobs/`, params);
     return res.jobs;
   }
-
-
 }
-
-
 
 export { JoblyApi };
