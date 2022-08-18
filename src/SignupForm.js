@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './SignupForm.css';
 
 /**form to sign up a new user
  *
@@ -48,6 +49,7 @@ function SignupForm({ signup }) {
   //TODO:bootstrap format for error message
   return (
     <div className="SignupForm">
+      <h1>Sign Up</h1>
       {errorState.length > 0 && (
         <div>
           {errorState.map((error) => (
@@ -65,6 +67,7 @@ function SignupForm({ signup }) {
           ></input>
           <input
             onChange={handleChange}
+            type="password"
             name="password"
             placeholder="password"
             value={(formData.password)}
@@ -72,13 +75,13 @@ function SignupForm({ signup }) {
           <input
             onChange={handleChange}
             name="firstName"
-            placeholder="First Name"
+            placeholder="first name"
             value={(formData.firstName)}
           ></input>
           <input
             onChange={handleChange}
             name="lastName"
-            placeholder="Last Name"
+            placeholder="last name"
             value={(formData.lastName)}
           ></input>
           <input
@@ -87,7 +90,7 @@ function SignupForm({ signup }) {
             placeholder="email"
             value={(formData.email)}
           ></input>
-          <button>sign up</button>
+          <button className="SignupForm-submit">sign up</button>
         </span>
       </form>
     </div>

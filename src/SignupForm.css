@@ -1,0 +1,22 @@
+.SignupForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin: 50px;
+}
+
+input {
+  width: 30%;
+  padding: 12px 20px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.SignupForm-submit {
+    background-color: rgb(208, 236, 129);
+    border-radius: 4px;
+    height: 40px;
+}

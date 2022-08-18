@@ -31,7 +31,7 @@ function SearchForm({filter}) {
         <form className="SearchForm" onSubmit={handleSubmit}>
           <span>
             <input onChange={handleChange} name="params" placeholder="Enter search term.."></input>
-            <button>Submit</button>
+            <button className="SignupForm-submit">Submit</button>
             </span>
         </form>
     )

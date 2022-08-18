@@ -1,5 +1,20 @@
+.JobCardList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
 .JobCard {
+    display: flex;
+    flex-direction: column;
     border: 1px solid  black;
     margin: 30px 100px;
-    display: block;
+    background-color: rgb(224, 241, 192);
+    width: 400px;
+    
+}
+
+.JobCard-companyname {
+    font-size: 18px;
 }

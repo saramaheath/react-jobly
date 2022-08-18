@@ -1,5 +1,24 @@
+.CompanyList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .CompanyCard {
+    display: flex;
+    flex-direction: column;
     border: 1px solid  black;
     margin: 30px 100px;
-    display: block;
+    background-color: rgb(224, 241, 192);
+    width: 600px;
+}
+
+.CompanyCard-inner {
+    padding: 40px;
+    background-color: rgb(225, 248, 183);
+}
+
+.CompanyCard-image {
+    height: 50px;
 }

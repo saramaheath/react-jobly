@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import userContext from "./userContext";
 import React from "react";
+import './Homepage.css';
 
 /**Shows homepage
  *
@@ -33,7 +34,7 @@ function Homepage() {
         <div>
           <h1>Jobly</h1>
           <h3>All the jobs in one, convenient place.</h3>
-          <h2>Welcome Back, {user.firstName} </h2>
+          <h2 className="Homepage-welcomeback" >Welcome Back, {user.firstName}! </h2>
         </div>
       )}
     </div>

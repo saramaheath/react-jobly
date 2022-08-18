@@ -41,7 +41,7 @@ function JobList() {
   if (jobList.isLoading) return <i>Loading...</i>;
 
   return (
-    <div className="JobList">
+    <div className="JobList-cards">
       <SearchForm filter={filter} />
       <JobCardList jobs={jobList.data} />
     </div>

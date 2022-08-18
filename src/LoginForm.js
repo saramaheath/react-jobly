@@ -44,6 +44,7 @@ function LoginForm({ login }) {
         ></input>
         <input
           onChange={handleChange}
+          type="password"
           name="password"
           placeholder="password"
           value={formData.password}
