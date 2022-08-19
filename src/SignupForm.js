@@ -24,7 +24,6 @@ function SignupForm({ signup }) {
     email: "",
   });
   const [errorState, setErrorState] = useState([]);
-  console.log(formData, "formData for sign up");
 
   /** Update form input. */
   function handleChange(evt) {

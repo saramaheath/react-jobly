@@ -15,7 +15,6 @@ function LoginForm({ login }) {
   const navigate = useNavigate()
   console.log("loginform");
   const [formData, setFormData] = useState({username: '', password: ''});
-  console.log(formData, "formData for login");
 
   /** Update form input. */
   function handleChange(evt) {
