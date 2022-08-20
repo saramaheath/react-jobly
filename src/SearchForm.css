@@ -1,7 +1,11 @@
 .SearchForm {
-  padding: 10px;
-  margin: 50px;
-  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.SearchForm-form {
+  width: 500px;
 }
 
 input {
@@ -13,8 +17,8 @@ input {
   box-sizing: border-box;
 }
 
-.SignupForm-submit {
-    background-color: rgb(208, 236, 129);
+.SearchForm-submit {
+    background-color: rgb(225, 248, 183);
     border-radius: 4px;
     height: 40px;
 }

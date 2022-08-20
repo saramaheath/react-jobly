@@ -48,21 +48,15 @@ function SignupForm({ signup }) {
   //TODO:bootstrap format for error message
   return (
     <div className="SignupForm">
-      <h1>Sign Up</h1>
-      {errorState.length > 0 && (
-        <div>
-          {errorState.map((error) => (
-            <p>{error}</p>
-          ))}
-        </div>
-      )}
-      <form onSubmit={handleSubmit}>
-        <span>
+      <h1 className="SignupForm-title">Sign Up</h1>
+      <form className="SignupForm-inputs" onSubmit={handleSubmit}>
+        
           <input
             onChange={handleChange}
             name="username"
             placeholder="username"
             value={(formData.username)}
+            autoComplete="on"
           ></input>
           <input
             onChange={handleChange}
@@ -70,28 +64,39 @@ function SignupForm({ signup }) {
             name="password"
             placeholder="password"
             value={(formData.password)}
+            autoComplete="on"
           ></input>
           <input
             onChange={handleChange}
             name="firstName"
             placeholder="first name"
             value={(formData.firstName)}
+            autoComplete="on"
           ></input>
           <input
             onChange={handleChange}
             name="lastName"
             placeholder="last name"
             value={(formData.lastName)}
+            autoComplete="on"
           ></input>
           <input
             onChange={handleChange}
             name="email"
             placeholder="email"
             value={(formData.email)}
+            autoComplete="on"
           ></input>
-          <button className="SignupForm-submit">sign up</button>
-        </span>
+          <button className="SignupForm-submit">Sign Up</button>
+        
       </form>
+      {errorState.length > 0 && (
+        <div>
+          {errorState.map((error) => (
+            <b className="SignupForm-error">{error}</b>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

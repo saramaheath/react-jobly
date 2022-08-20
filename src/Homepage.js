@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import userContext from "./userContext";
 import React from "react";
-import './Homepage.css';
+import "./Homepage.css";
 
 /**Shows homepage
  *
@@ -18,23 +18,30 @@ function Homepage() {
   return (
     <div className="Homepage">
       {user === null && (
-        <div>
-          <h1>Jobly</h1>
-          <h3>All the jobs in one, convenient place.</h3>
-
-          <a href="/login" className="btn btn-primary">
-            Log in
-          </a>
-          <a href="/signup" className="btn btn-primary">
-            Sign up
-          </a>
+        <div className="Homepage-container">
+          <h1 className="Homepage-title">Jobly</h1>
+          <p className="Homepage-tagline">
+            All the jobs in one, convenient place.
+          </p>
+          <div>
+            <a href="/login" className="btn btn-primary">
+              <b>Login</b>
+            </a>
+            <a href="/signup" className="btn btn-primary">
+              <b>Sign up</b>
+            </a>
+          </div>
         </div>
       )}
       {user !== null && (
         <div>
-          <h1>Jobly</h1>
-          <h3>All the jobs in one, convenient place.</h3>
-          <h2 className="Homepage-welcomeback" >Welcome Back, {user.firstName}! </h2>
+          <h1 className="Homepage-title">Jobly</h1>
+          <p className="Homepage-tagline">
+            All the jobs in one, convenient place.
+          </p>
+          <h2 className="Homepage-welcomeback">
+            Welcome Back, {user.firstName}!{" "}
+          </h2>
         </div>
       )}
     </div>

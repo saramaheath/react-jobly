@@ -2,7 +2,12 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
 
+.JobList-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .JobCard {
